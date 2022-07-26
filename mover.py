@@ -1,4 +1,3 @@
-#!/opt/homebrew/bin/python3
 import os
 import sys
 from re import sub
@@ -19,7 +18,9 @@ class Dir:
             for name in files:
                 for substr in self.filter:
                     if substr in name:
-                        print(name)
+                        srcfile = root+'/'+name
+                        print("moving " +srcfile+" to "+self.dest)
+                        os.system('mv "'+srcfile+'" '+ self.dest)
 
     def go(self):
         dirExists = os.path.exists(self.dest)
@@ -36,6 +37,7 @@ class Dir:
 srcPath=""
 dstPath=""
 filter=""
+recursive=False
 if(len(sys.argv)==1):
     print("usage: "+sys.argv[0]+" -s=<src_dir> -d=<dst_dir -f=mkv,mp4,avi")
     exit(0)
@@ -46,6 +48,9 @@ for arg in sys.argv:
     dstPath=arg.split("=")[1]
   if("-f" in arg):
     filter=arg.split("=")[1]
+  if("-f" in arg):
+    recursive=True
+
 dirExists = os.path.exists(srcPath) and os.path.exists(dstPath)
 if(not dirExists):
     print("Error: Quell oder Zielverzeichnis existieren nicht!")
@@ -54,4 +59,7 @@ if(not dirExists):
 dir = Dir(srcPath, dstPath)
 for ext in filter.split(','):
     dir.add(ext)
-dir.go()
+if(recursive):
+    dir.rec()
+else:
+    dir.go()
