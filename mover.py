@@ -48,7 +48,7 @@ for arg in sys.argv:
     dstPath=arg.split("=")[1]
   if("-f" in arg):
     filter=arg.split("=")[1]
-  if("-f" in arg):
+  if("-r" in arg):
     recursive=True
 
 dirExists = os.path.exists(srcPath) and os.path.exists(dstPath)
