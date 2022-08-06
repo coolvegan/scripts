@@ -9,7 +9,7 @@ def timestamp(my_canvas):
     my_canvas.setFont('Helvetica', 16)
     now = datetime.now()
     uhrzeit = now.strftime("%H:%M:%S")+" Uhr"
-    datum = now.strftime("%m.%d.%Y")
+    datum = now.strftime("%d.%m.%Y")
     my_canvas.drawString(90+15+60, 10, " PDF Merge by Marco Kittel, ausgeführt am "+ datum+ " um "+ uhrzeit)
     #my_canvas.drawImage('youtube.png', 1300, 150, width=50, preserveAspectRatio=True, mask='auto')
 def youtube(my_canvas,x=0,y=0):
